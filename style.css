@@ -29,6 +29,15 @@ body {
   border-radius: 5px;
 }
 
+.episode-header {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #888;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+}
+
 h2 {
   font-size: 18px;
   margin: 5px 0;
