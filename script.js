@@ -6,9 +6,9 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-    rootElem.innerHTML = ""; 
+  rootElem.innerHTML = "";
 
-      episodeList.forEach((episode) => {
+  episodeList.forEach((episode) => {
     // Format the episode code (e.g., S02E07)
     const episodeCode = `S${String(episode.season).padStart(2, "0")}E${String(
       episode.number
@@ -20,7 +20,9 @@ function makePageForEpisodes(episodeList) {
 
     // Populate the episode details
     episodeDiv.innerHTML = `
+   <div class="episode-header">
       <h2>${episode.name} (${episodeCode})</h2>
+      </div>
       <h3>Season ${episode.season}, Episode ${episode.number}</h3>
       <img src="${episode.image?.medium}" alt="${episode.name}" />
       <p>${episode.summary || "No summary available."}</p>
@@ -36,6 +38,5 @@ function makePageForEpisodes(episodeList) {
     'Data originally from <a href="https://tvmaze.com/" target="_blank">TVMaze.com</a>';
   rootElem.appendChild(attribution);
 }
-
 
 window.onload = setup;
