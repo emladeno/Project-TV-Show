@@ -20,10 +20,12 @@ function makePageForEpisodes(episodeList) {
 
     // Populate the episode details
     episodeDiv.innerHTML = `
+     
    <div class="episode-header">
       <h2>${episode.name} (${episodeCode})</h2>
       </div>
       <h3>Season ${episode.season}, Episode ${episode.number}</h3>
+
       <img src="${episode.image?.medium}" alt="${episode.name}" />
       <p>${episode.summary || "No summary available."}</p>
       <a href="${episode.url}" target="_blank">More on TVMaze</a>
