@@ -12,8 +12,32 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  padding-top: 120px;
 }
 
+.dorpDownContainer{
+  width: 100%;
+  color: #7e1919;
+  position: fixed;
+  top: 5px;
+  left: 5px;
+  padding: 10px;
+  z-index: 100;
+  background-color:  #e8eca6;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+#select-movie{
+  background-color: #ebeec9;
+  padding: 10px 5px;
+}
+#search-input{
+  background-color: #ebeec9;
+  margin-right: 100px;
+  width: auto;
+  padding: 10px 5px;
+}
 .episode {
   background: #fff;
   border: 1px solid #ddd;
@@ -44,7 +68,7 @@ h2 {
 }
 
 a {
-  color: #007BFF;
+  color: #04346841;
   text-decoration: none;
 }
 
