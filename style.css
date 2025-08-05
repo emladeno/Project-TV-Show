@@ -12,10 +12,10 @@ body {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  padding-top: 120px;
+  padding-top: 130px;
 }
 
-.dorpDownContainer{
+.dropDownContainer{
   width: 100%;
   color: #7e1919;
   position: fixed;
@@ -68,7 +68,7 @@ h2 {
 }
 
 a {
-  color: #04346841;
+  color: dark blue;
   text-decoration: none;
 }
 
