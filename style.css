@@ -29,9 +29,23 @@ body {
 }
 
 #select-movie{
+  min-width: 300px;
   background-color: #ebeec9;
   padding: 10px 5px;
 }
+
+label[for='select-show'] {
+  margin-left:170px;
+}
+
+#select-show{
+  min-width: 300px;
+  background-color: #ebeec9;
+  padding: 10px 5px;
+}
+
+
+
 #search-input{
   background-color: #ebeec9;
   margin-right: 100px;

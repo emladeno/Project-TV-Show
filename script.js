@@ -41,10 +41,22 @@ function makePageForEpisodes(episodeList) {
   const selectMovie = document.createElement("select");
   selectMovie.id = "select-movie";
 
+  const label2 = document.createElement("label");
+  label2.textContent = "Select A Show ";
+  label2.setAttribute("for", "select-show");
+
+  const selectShow = document.createElement("select");
+  selectShow.id = "select-show";
+
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "--Show All Episodes--";
   selectMovie.append(defaultOption);
+
+const showOption = document.createElement("option");
+  showOption.value = "";
+  showOption.textContent = "--Display Shows--";
+  selectShow.append(showOption);
 
   const paragraphDisplay = document.createElement("p");
   paragraphDisplay.id = "selectedMovie";
@@ -52,6 +64,8 @@ function makePageForEpisodes(episodeList) {
 
   divDropDown.append(label);
   divDropDown.append(selectMovie);
+  divDropDown.append(label2)
+  divDropDown.append(selectShow);
   divDropDown.append(paragraphDisplay);
 
   rootElem.append(divDropDown);
