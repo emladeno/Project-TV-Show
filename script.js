@@ -1,25 +1,83 @@
 //You can edit ALL of the code here
 let fetchedEpisodes = [];
-
-function setup() {
+let fetchShows = []
+async function setup() {
   const rootElem = document.getElementById("root");
-  rootElem.innerHTML = "<p>Loading episodes, please wait...</p>";
+  rootElem.innerHTML = "<p>Loading Shows, please wait...</p>";
 
-  fetch("https://api.tvmaze.com/shows/82/episodes")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok (${response.status})`);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      fetchedEpisodes = data;
-      makePageForEpisodes(fetchedEpisodes);
-    })
-    .catch((error) => {
-      rootElem.innerHTML = `<p style="color:red;">Error loading episodes: ${error.message}</p>`;
-    });
+  try {
+    const response =await fetch("https://api.tvmaze.com/shows")
+    if(!response.ok) {
+      throw new Error(`Network issue ${response.status}`);
+    }
+    const showData = await response.json()
+    fetchShows = showData
+
+    const defaultShowId = '2'
+    const episodesResponse = await fetch(`https://api.tvmaze.com/shows/${defaultShowId}/episodes`);
+    const defaultEpisodes = await episodesResponse.json()
+    
+    fetchedEpisodes = defaultEpisodes
+    makePageForEpisodes(fetchedEpisodes)
+
+    populateShowDropdown(fetchShows);
+  } catch (error){
+    rootElem.innerHTML = rootElem.innerHTML = `<p style="color:red;">Error loading data: ${error.message}</p>`;
+  }
 }
+
+  // This function populates the 'select-show' dropdown with options
+  function populateShowDropdown(showList) {
+    const selectShow = document.getElementById('select-show');
+    showList.sort((a, b) => a.name.localeCompare(b.name));
+
+    // Clear any existing options and add the default
+    selectShow.innerHTML = '';
+    const defaultShowOption = document.createElement('option');
+    defaultShowOption.value = '';
+    defaultShowOption.textContent = '--Select A Show--';
+    selectShow.append(defaultShowOption);
+
+    // Loop over the shows and add them as options
+    showList.forEach((show) => {
+      const option = document.createElement('option');
+      option.value = show.id;
+      option.textContent = show.name;
+      selectShow.append(option);
+    });
+
+    // Add the event listener to the 'select-show' dropdown
+    selectShow.addEventListener('change', function() {
+      const selectedShowId = this.value;
+      if (selectedShowId) {
+        displayFetchedEpisodes(selectedShowId);
+
+      }
+    });
+  }
+
+  // This function fetches and displays episodes for a given show ID
+  async function displayFetchedEpisodes(showId) {
+    const rootElem = document.getElementById('root');
+    rootElem.innerHTML = '<p>Loading episodes, Please wait..</p>';
+
+    if (!showId) {
+      rootElem.innerHTML = `<p>Please select a show to display its episodes.</p>`;
+      makePageForEpisodes([]);
+      return;
+    }
+    
+    try {
+      const response = await fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+      const episodeList = await  response.json()
+      fetchedEpisodes =  episodeList
+      makePageForEpisodes(fetchedEpisodes)
+
+    } catch(error) {
+      rootElem.innerHTML = `<p style="color:red;">Error loading episodes for show ID ${showId}: ${error.message}</p>`;
+    }
+  }
+
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
@@ -53,7 +111,7 @@ function makePageForEpisodes(episodeList) {
   defaultOption.textContent = "--Show All Episodes--";
   selectMovie.append(defaultOption);
 
-const showOption = document.createElement("option");
+  const showOption = document.createElement("option");
   showOption.value = "";
   showOption.textContent = "--Display Shows--";
   selectShow.append(showOption);
@@ -69,7 +127,9 @@ const showOption = document.createElement("option");
   divDropDown.append(paragraphDisplay);
 
   rootElem.append(divDropDown);
-
+  
+  populateShowDropdown(fetchShows)
+  
   episodeList.forEach((episode) => {
     // Format the episode code (e.g., S02E07)
     const episodeCode = `S${String(episode.season).padStart(2, "0")}E${String(
