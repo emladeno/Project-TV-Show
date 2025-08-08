@@ -1,6 +1,8 @@
 //You can edit ALL of the code here
 let fetchedEpisodes = [];
 let fetchShows = []
+const episodeCache = {}
+
 async function setup() {
   const rootElem = document.getElementById("root");
   rootElem.innerHTML = "<p>Loading Shows, please wait...</p>";
@@ -60,7 +62,12 @@ async function setup() {
   async function displayFetchedEpisodes(showId) {
     const rootElem = document.getElementById('root');
     rootElem.innerHTML = '<p>Loading episodes, Please wait..</p>';
-
+    
+    if(episodeCache[showId]){
+        fetchedEpisodes = episodeCache[showId]
+        makePageForEpisodes(fetchedEpisodes)
+        return;
+    }
     if (!showId) {
       rootElem.innerHTML = `<p>Please select a show to display its episodes.</p>`;
       makePageForEpisodes([]);
