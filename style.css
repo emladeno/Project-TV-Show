@@ -15,43 +15,79 @@ body {
   padding-top: 130px;
 }
 
-.dropDownContainer{
+.dropDownContainer {
   width: 100%;
-  color: #7e1919;
   position: fixed;
   top: 5px;
   left: 5px;
-  padding: 10px;
   z-index: 100;
-  background-color:  #e8eca6;
+  background-color: #e8eca6;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #7e1919;
+  flex-wrap: wrap; /* allows wrapping if screen too narrow */
 }
 
-#select-movie{
+.back-button {
+  padding: 8px 16px;
+  background-color: #7e1919;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#selectedEpisodeInfo {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+  margin: 0 12px;
+  white-space: nowrap;
+}
+
+#select-movie {
   min-width: 300px;
   background-color: #ebeec9;
   padding: 10px 5px;
 }
 
 label[for='select-show'] {
-  margin-left:170px;
+  margin-left: 170px;
 }
 
-#select-show{
+label[for='select-show-switch'] {
+  margin-left: 170px;
+}
+
+#select-show,
+#select-show-switch,
+#episode-select,
+#episode-search-input {
   min-width: 300px;
   background-color: #ebeec9;
-  padding: 10px 5px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-
-
-#search-input{
+#search-input {
   background-color: #ebeec9;
   margin-right: 100px;
   width: auto;
   padding: 10px 5px;
 }
+
 .episode {
   background: #fff;
   border: 1px solid #ddd;
@@ -82,10 +118,101 @@ h2 {
 }
 
 a {
-  color: dark blue;
+  color: darkblue;
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
 }
+
+/* Label text styling */
+.dropDownContainer label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Search input box styling */
+#show-search {
+  width: 200px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Show count text styling */
+#show-count {
+  margin: 0 16px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Shows container */
+.shows-container {
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+}
+
+.show-card {
+  display: flex;
+  gap: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.1);
+  padding: 16px;
+  margin-bottom: 24px;
+
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.show-card > .left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 160px;
+  flex-shrink: 0;
+}
+
+.show-card > .left-column > .show-title {
+  margin-bottom: 8px;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #111;
+}
+
+.show-card > .left-column > img {
+  width: 140px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.show-info {
+  flex: 2;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.show-meta {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #333;
+  padding-left: 12px;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
