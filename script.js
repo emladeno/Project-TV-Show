@@ -90,7 +90,7 @@ function makePageForEpisodes(episodeList) {
   rootElem.innerHTML = "";
 
   const divDropDown = document.createElement("div");
-  divDropDown.classList = "dropDownContainer";
+  divDropDown.className = "dropDownContainer";
 
   const backButton = document.createElement("button");
   backButton.textContent = "← Back to All Shows";
@@ -175,6 +175,10 @@ function makePageForEpisodes(episodeList) {
     episodeDiv.className = "episode";
     episodeDiv.setAttribute("data-episode-code", episodeCode);
 
+    const cleanSummary = episode.summary
+      ? episode.summary.replace(/<[^>]*>?/gm, "") // remove HTML tags
+      : "No summary available.";
+
     episodeDiv.innerHTML = `
       <div class="episode-header">
         <h2>${episode.name} (${episodeCode})</h2>
@@ -184,11 +188,11 @@ function makePageForEpisodes(episodeList) {
         episode.image?.medium ||
         "https://via.placeholder.com/210x295?text=No+Image"
       }" alt="${episode.name}" />
-      <p>${episode.summary || "No summary available."}</p>
+      <p class="episode-summary">${ cleanSummary}</p>
       <a href="${episode.url}" target="_blank" rel="noopener">More on TVMaze</a>
     `;
 
-    rootElem.appendChild(episodeDiv);
+    rootElem.append(episodeDiv);
   });
 
   // === Handle dropdown episode selection ===
@@ -221,12 +225,12 @@ function makePageForEpisodes(episodeList) {
   searchInput.addEventListener("input", function () {
     const searchTerm = this.value.toLowerCase();
     const allEpisodes = document.querySelectorAll(".episode");
-    let count = 0;8
+    let count = 0;
 
     allEpisodes.forEach((episodeDiv) => {
       const code = episodeDiv.getAttribute("data-episode-code").toLowerCase();
       const name = episodeDiv.querySelector("h2").textContent.toLowerCase();
-      const summary = episodeDiv.querySelector("p").textContent.toLowerCase();
+      const summary = episodeDiv.querySelector(".episode-summary").textContent.toLowerCase();
 
       if (
         code.includes(searchTerm) ||
