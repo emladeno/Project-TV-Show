@@ -221,13 +221,18 @@ function makePageForEpisodes(episodeList) {
   searchInput.addEventListener("input", function () {
     const searchTerm = this.value.toLowerCase();
     const allEpisodes = document.querySelectorAll(".episode");
-    let count = 0;
+    let count = 0;8
 
     allEpisodes.forEach((episodeDiv) => {
       const code = episodeDiv.getAttribute("data-episode-code").toLowerCase();
       const name = episodeDiv.querySelector("h2").textContent.toLowerCase();
+      const summary = episodeDiv.querySelector("p").textContent.toLowerCase();
 
-      if (code.includes(searchTerm) || name.includes(searchTerm)) {
+      if (
+        code.includes(searchTerm) ||
+        name.includes(searchTerm) ||
+        summary.includes(searchTerm)
+      ) {
         episodeDiv.style.display = "block";
         count++;
       } else {
